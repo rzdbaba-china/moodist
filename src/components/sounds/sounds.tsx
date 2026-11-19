@@ -7,6 +7,7 @@ import { cn } from '@/helpers/styles';
 import { fade, scale, mix } from '@/lib/motion';
 
 import styles from './sounds.module.css';
+import { t } from '@/lib/i18n';
 
 import type { Sounds } from '@/data/types';
 
@@ -108,7 +109,7 @@ export function Sounds({ functional, id, sounds }: SoundsProps) {
               onAnimationComplete={() => setIsAnimating(false)}
               onAnimationStart={() => setIsAnimating(true)}
             >
-              {showAll ? 'Show Less' : 'Show More'}
+              {t(showAll ? 'Show Less' : 'Show More')}
             </motion.span>
           </AnimatePresence>
         </button>

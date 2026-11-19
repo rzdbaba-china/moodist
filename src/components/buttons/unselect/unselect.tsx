@@ -8,6 +8,7 @@ import { Tooltip } from '@/components/tooltip';
 
 import { useSoundStore } from '@/stores/sound';
 import { cn } from '@/helpers/styles';
+import { t } from '@/lib/i18n';
 
 import styles from './unselect.module.css';
 
@@ -64,9 +65,11 @@ export function UnselectButton() {
             >
               <button
                 disabled={noSelected && !hasHistory}
-                aria-label={
-                  hasHistory ? 'Restore Previous Sounds' : 'Unselect All Sounds'
-                }
+                aria-label={t(
+                  hasHistory
+                    ? 'Restore Previous Sounds'
+                    : 'Unselect All Sounds',
+                )}
                 className={cn(
                   styles.unselectButton,
                   noSelected && !hasHistory && styles.disabled,

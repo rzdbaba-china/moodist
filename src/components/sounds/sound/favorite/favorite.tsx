@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { useSoundStore } from '@/stores/sound';
 import { cn } from '@/helpers/styles';
 import { fade } from '@/lib/motion';
+import { t } from '@/lib/i18n';
 
 import styles from './favorite.module.css';
 
@@ -46,8 +47,8 @@ export function Favorite({ id, label }: FavoriteProps) {
         className={cn(styles.favoriteButton, isFavorite && styles.isFavorite)}
         aria-label={
           isFavorite
-            ? `Remove ${label} Sound from Favorites`
-            : `Add ${label} Sound to Favorites`
+            ? t('Remove {sound} from favorites').replace('{sound}', label)
+            : t('Add {sound} to favorites').replace('{sound}', label)
         }
         onKeyDown={handleKeyDown}
         onClick={e => {

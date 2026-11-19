@@ -16,6 +16,7 @@ import styles from './sound.module.css';
 import type { Sound as SoundType } from '@/data/types';
 
 import { useKeyboardButton } from '@/hooks/use-keyboard-button';
+import { t } from '@/lib/i18n';
 
 interface SoundProps extends SoundType {
   functional: boolean;
@@ -28,6 +29,7 @@ export const Sound = forwardRef<HTMLDivElement, SoundProps>(function Sound(
   { functional, hidden, icon, id, label, selectHidden, src, unselectHidden },
   ref,
 ) {
+  const displayLabel = t(label);
   const isPlaying = useSoundStore(state => state.isPlaying);
   const play = useSoundStore(state => state.play);
   const selectSound = useSoundStore(state => state.select);
@@ -97,7 +99,7 @@ export const Sound = forwardRef<HTMLDivElement, SoundProps>(function Sound(
 
   return (
     <div
-      aria-label={`${label} sound`}
+      aria-label={`${displayLabel} ${t('sound')}`}
       ref={ref}
       role="button"
       tabIndex={0}
@@ -121,22 +123,25 @@ export const Sound = forwardRef<HTMLDivElement, SoundProps>(function Sound(
       <div className={styles.content}>
         <div className={styles.heading}>
           <div className={styles.label} id={id}>
-            {label}
+            {displayLabel}
           </div>
-          <Favorite id={id} label={label} />
+          <Favorite id={id} label={displayLabel} />
         </div>
         <div className={styles.controls}>
-          <Range id={id} label={label} />
+          <Range id={id} label={displayLabel} />
           {isSelected && (
             <button
-              aria-label={`Oscillate ${label} volume`}
+              aria-label={t('Oscillate {sound} volume').replace(
+                '{sound}',
+                displayLabel,
+              )}
               aria-pressed={isOscillating}
               className={cn(
                 styles.oscillation,
                 isOscillating && styles.oscillating,
               )}
               disabled={locked}
-              title="Gently raise and lower volume"
+              title={t('Gently raise and lower volume')}
               type="button"
               onClick={event => {
                 event.stopPropagation();
@@ -145,7 +150,7 @@ export const Sound = forwardRef<HTMLDivElement, SoundProps>(function Sound(
               onKeyDown={event => event.stopPropagation()}
             >
               <TbWaveSine aria-hidden="true" />
-              <span>Swell</span>
+              <span>{t('Swell')}</span>
             </button>
           )}
         </div>

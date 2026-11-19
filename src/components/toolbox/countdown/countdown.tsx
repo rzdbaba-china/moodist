@@ -12,6 +12,7 @@ import {
 import { useSoundEffect } from '@/hooks/use-sound-effect';
 import { useSettingsStore } from '@/stores/settings';
 import { padNumber } from '@/helpers/number';
+import { t } from '@/lib/i18n';
 
 import styles from './countdown.module.css';
 
@@ -100,7 +101,7 @@ export function Countdown({ onClose, show }: CountdownProps) {
         >
           <div className={styles.fields}>
             <div className={styles.field}>
-              <label htmlFor="countdown-hours">Hours</label>
+              <label htmlFor="countdown-hours">{t('Hours')}</label>
               <input
                 id="countdown-hours"
                 inputMode="numeric"
@@ -116,7 +117,7 @@ export function Countdown({ onClose, show }: CountdownProps) {
             </div>
 
             <div className={styles.field}>
-              <label htmlFor="countdown-minutes">Minutes</label>
+              <label htmlFor="countdown-minutes">{t('Minutes')}</label>
               <input
                 id="countdown-minutes"
                 inputMode="numeric"
@@ -139,7 +140,7 @@ export function Countdown({ onClose, show }: CountdownProps) {
             </div>
 
             <div className={styles.field}>
-              <label htmlFor="countdown-seconds">Seconds</label>
+              <label htmlFor="countdown-seconds">{t('Seconds')}</label>
               <input
                 id="countdown-seconds"
                 inputMode="numeric"
@@ -176,13 +177,13 @@ export function Countdown({ onClose, show }: CountdownProps) {
         <div>
           <div className={styles.displayTime}>
             <p className={styles.status}>
-              {isActive ? 'Counting down' : 'Paused'}
+              {t(isActive ? 'Counting down' : 'Paused')}
             </p>
             <span className={styles.time} role="timer">
               {formatTime(timeLeft)}
             </span>
             <div
-              aria-label="Countdown progress"
+              aria-label={t('Countdown progress')}
               aria-valuemax={initialTime}
               aria-valuemin={0}
               aria-valuenow={elapsedTime}
@@ -194,14 +195,16 @@ export function Countdown({ onClose, show }: CountdownProps) {
                 style={{ width: `${progress}%` }}
               />
             </div>
-            <p className={styles.elapsed}>Elapsed {formatTime(elapsedTime)}</p>
+            <p className={styles.elapsed}>
+              {t('Elapsed {time}').replace('{time}', formatTime(elapsedTime))}
+            </p>
           </div>
 
           <ModalActions>
             <ModalButton onClick={handleBack}>Change time</ModalButton>
 
             <ModalButton variant="primary" onClick={toggleTimer}>
-              {isActive ? 'Pause' : 'Resume'}
+              {t(isActive ? 'Pause' : 'Resume')}
             </ModalButton>
           </ModalActions>
         </div>

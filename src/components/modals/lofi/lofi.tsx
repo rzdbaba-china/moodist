@@ -11,6 +11,7 @@ import {
 
 import styles from './lofi.module.css';
 import { padNumber } from '@/helpers/number';
+import { t } from '@/lib/i18n';
 
 interface LofiProps {
   onClose: () => void;
@@ -57,10 +58,9 @@ export function LofiModal({ onClose, show }: LofiProps) {
       {!isAccepted ? (
         <div className={styles.notice}>
           <p>
-            This feature plays music using embedded YouTube videos. By
-            continuing, you agree to connect to YouTube, which may collect data
-            in accordance with their privacy policy. We do not control or track
-            this data.
+            {t(
+              'This feature plays music using embedded YouTube videos. By continuing, you agree to connect to YouTube, which may collect data in accordance with their privacy policy. We do not control or track this data.',
+            )}
           </p>
 
           <ModalActions>

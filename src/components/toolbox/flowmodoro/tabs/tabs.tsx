@@ -1,4 +1,5 @@
 import { cn } from '@/helpers/styles';
+import { t } from '@/lib/i18n';
 
 import styles from './tabs.module.css';
 
@@ -17,7 +18,7 @@ export function Tabs({ onSelect, selectedTab, tabs }: TabsProps) {
           key={tab.id}
           onClick={() => onSelect(tab.id)}
         >
-          {tab.label}
+          {t(tab.label)}
         </button>
       ))}
     </div>

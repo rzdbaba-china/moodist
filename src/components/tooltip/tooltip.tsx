@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Tooltip as TooltipPrimitive } from 'radix-ui';
 
 import { slideX, slideY, mix, fade } from '@/lib/motion';
+import { t } from '@/lib/i18n';
 
 import styles from './tooltip.module.css';
 
@@ -71,7 +72,7 @@ export function Tooltip({
                 initial="hidden"
                 variants={variants}
               >
-                {content}
+                {t(content)}
               </motion.div>
             </TooltipPrimitive.Content>
           </TooltipPrimitive.Portal>

@@ -6,6 +6,7 @@ import { OPEN_PRESETS } from '@/constants/events';
 import { dispatch } from '@/lib/event';
 import { useSoundStore } from '@/stores/sound';
 import { Tooltip } from '@/components/tooltip';
+import { t } from '@/lib/i18n';
 
 import styles from './save.module.css';
 
@@ -46,7 +47,7 @@ export function SaveButton() {
           <Tooltip.Provider delayDuration={0}>
             <Tooltip content="Save current mix">
               <button
-                aria-label="Save current mix"
+                aria-label={t('Save current mix')}
                 className={styles.saveButton}
                 disabled={locked}
                 onClick={() => dispatch(OPEN_PRESETS)}

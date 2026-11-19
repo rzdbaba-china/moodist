@@ -1,4 +1,5 @@
 import { cn } from '@/helpers/styles';
+import { t } from '@/lib/i18n';
 
 import styles from './modal.module.css';
 
@@ -13,14 +14,24 @@ export function ModalTitle({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<'h2'>) {
-  return <h2 className={cn(styles.title, className)} {...props} />;
+  const { children, ...rest } = props;
+  return (
+    <h2 className={cn(styles.title, className)} {...rest}>
+      {typeof children === 'string' ? t(children) : children}
+    </h2>
+  );
 }
 
 export function ModalDescription({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<'p'>) {
-  return <p className={cn(styles.description, className)} {...props} />;
+  const { children, ...rest } = props;
+  return (
+    <p className={cn(styles.description, className)} {...rest}>
+      {typeof children === 'string' ? t(children) : children}
+    </p>
+  );
 }
 
 export function ModalActions({
@@ -41,6 +52,7 @@ export function ModalButton({
   variant = 'default',
   ...props
 }: ModalButtonProps) {
+  const { children, ...rest } = props;
   return (
     <button
       className={cn(
@@ -49,7 +61,9 @@ export function ModalButton({
         fullWidth && styles.fullWidth,
         className,
       )}
-      {...props}
-    />
+      {...rest}
+    >
+      {typeof children === 'string' ? t(children) : children}
+    </button>
   );
 }

@@ -53,6 +53,7 @@ import { closeModals } from '@/lib/modal';
 import { toggleTheme } from '@/lib/theme';
 import { subscribe } from '@/lib/event';
 import { OPEN_PRESETS } from '@/constants/events';
+import { t } from '@/lib/i18n';
 
 export function Menu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -131,7 +132,7 @@ export function Menu() {
           onOpenChange={o => setIsOpen(o)}
         >
           <DropdownMenu.Trigger asChild>
-            <button aria-label="Menu" className={styles.menuButton}>
+            <button aria-label={t('Menu')} className={styles.menuButton}>
               {isOpen ? <IoClose /> : <IoMenu />}
             </button>
           </DropdownMenu.Trigger>

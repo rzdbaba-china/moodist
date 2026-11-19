@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo, useCallback } from 'react';
 import { motion } from 'motion/react';
 
 import { padNumber } from '@/helpers/number';
+import { t } from '@/lib/i18n';
 
 import styles from './exercise.module.css';
 
@@ -105,7 +106,7 @@ export function Exercise() {
           key={selectedExercise}
           variants={animationVariants}
         />
-        <p className={styles.phase}>{PHASE_LABELS[currentPhase]}</p>
+        <p className={styles.phase}>{t(PHASE_LABELS[currentPhase])}</p>
       </div>
 
       <div className={styles.selectWrapper}>
@@ -116,7 +117,7 @@ export function Exercise() {
         >
           {Object.keys(EXERCISE_PHASES).map(exercise => (
             <option key={exercise} value={exercise}>
-              {exercise}
+              {t(exercise)}
             </option>
           ))}
         </select>

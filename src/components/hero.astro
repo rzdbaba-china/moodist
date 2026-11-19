@@ -27,15 +27,22 @@ const count = soundCount();
       </div>
 
       <h1 class="title">
-        Ambient Sounds<br />For Focus and Calm
+        <span data-i18n="Ambient Sounds">Ambient Sounds</span><br /><span
+          data-i18n="For Focus and Calm">For Focus and Calm</span
+        >
       </h1>
-      <p class="desc">Free and open-source.</p>
+      <p class="desc" data-i18n="Free and open-source.">
+        Free and open-source.
+      </p>
 
       <p class="sounds">
         <span aria-hidden="true" class="icon">
           <BsSoundwave />
         </span>
-        <span class="label"><strong>{count}</strong> ambient sounds</span>
+        <span class="label"><strong>{count}</strong> <span
+            data-i18n="ambient sounds"
+          >ambient sounds</span></span
+        >
       </p>
     </div>
   </Container>

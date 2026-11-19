@@ -3,6 +3,7 @@ import { BiPause, BiPlay } from 'react-icons/bi/index';
 import { useHotkeys } from 'react-hotkeys-hook';
 
 import { useSoundStore } from '@/stores/sound';
+import { t } from '@/lib/i18n';
 import { useSnackbar } from '@/contexts/snackbar';
 import { cn } from '@/helpers/styles';
 
@@ -20,7 +21,8 @@ export function PlayButton() {
   const handleToggle = useCallback(() => {
     if (locked) return;
 
-    if (noSelected) return showSnackbar('Please first select a sound to play.');
+    if (noSelected)
+      return showSnackbar(t('Please first select a sound to play.'));
 
     toggle();
   }, [showSnackbar, toggle, noSelected, locked]);

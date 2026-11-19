@@ -6,6 +6,7 @@ import {
 } from '@/components/modal';
 import { Slider } from '@/components/slider';
 import { useSettingsStore } from '@/stores/settings';
+import { t } from '@/lib/i18n';
 
 import styles from './settings.module.css';
 
@@ -19,6 +20,8 @@ export function SettingsModal({ onClose, show }: SettingsModalProps) {
   const alarmVolume = useSettingsStore(state => state.alarmVolume);
   const setGlobalVolume = useSettingsStore(state => state.setGlobalVolume);
   const setAlarmVolume = useSettingsStore(state => state.setAlarmVolume);
+  const language = useSettingsStore(state => state.language);
+  const setLanguage = useSettingsStore(state => state.setLanguage);
 
   return (
     <Modal show={show} onClose={onClose}>
@@ -30,6 +33,22 @@ export function SettingsModal({ onClose, show }: SettingsModalProps) {
       </ModalHeader>
 
       <div className={styles.settings}>
+        <div className={styles.languageSetting}>
+          <label className={styles.label} htmlFor="language">
+            {t('Language')}
+          </label>
+          <select
+            className={styles.languageSelect}
+            id="language"
+            value={language}
+            onChange={event =>
+              setLanguage(event.target.value === 'zh-CN' ? 'zh-CN' : 'en')
+            }
+          >
+            <option value="en">English</option>
+            <option value="zh-CN">简体中文</option>
+          </select>
+        </div>
         <VolumeSetting
           description="Controls the overall level of your sound mix."
           label="Sound volume"
@@ -60,17 +79,19 @@ function VolumeSetting({
   onChange,
   value,
 }: VolumeSettingProps) {
+  const translatedLabel = t(label);
+
   return (
     <div className={styles.setting}>
       <div className={styles.settingHeader}>
         <div>
-          <p className={styles.label}>{label}</p>
-          <p className={styles.description}>{description}</p>
+          <p className={styles.label}>{translatedLabel}</p>
+          <p className={styles.description}>{t(description)}</p>
         </div>
         <span className={styles.value}>{Math.round(value * 100)}%</span>
       </div>
       <Slider
-        ariaLabel={label}
+        ariaLabel={translatedLabel}
         max={100}
         min={0}
         value={value * 100}

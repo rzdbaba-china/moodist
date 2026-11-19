@@ -7,9 +7,12 @@ import styles from './category-icons.module.css';
 import { Container } from '@/components/container';
 import { OPEN_SOUND_SEARCH } from '@/constants/events';
 import { dispatch } from '@/lib/event';
+import { t } from '@/lib/i18n';
+import { useSettingsStore } from '@/stores/settings';
 
 export default function CategoryIcons() {
-  const categories = useMemo(() => sounds.categories, []);
+  const language = useSettingsStore(state => state.language);
+  const categories = useMemo(() => sounds.categories, [language]);
   const categoriesRef = useRef<HTMLElement>(null);
   const [showStartFade, setShowStartFade] = useState(false);
   const [showEndFade, setShowEndFade] = useState(false);
@@ -44,8 +47,8 @@ export default function CategoryIcons() {
       <div className={styles.wrapper}>
         <div className={styles.header}>
           <div>
-            <h2 className={styles.title}>Browse sounds</h2>
-            <p>Jump to any category.</p>
+            <h2 className={styles.title}>{t('Browse sounds')}</h2>
+            <p>{t('Jump to any category.')}</p>
           </div>
           <button
             className={styles.searchButton}
@@ -53,12 +56,13 @@ export default function CategoryIcons() {
             onClick={() => dispatch(OPEN_SOUND_SEARCH)}
           >
             <BiSearch aria-hidden="true" />
-            Search<span className={styles.searchSuffix}> sounds</span>
+            {t('Search')}
+            <span className={styles.searchSuffix}> {t('sounds')}</span>
           </button>
         </div>
 
         <nav
-          aria-label="Sound categories"
+          aria-label={t('Sound categories')}
           className={`${styles.categories} ${showStartFade ? styles.fadeStart : ''} ${showEndFade ? styles.fadeEnd : ''}`}
           ref={categoriesRef}
         >
@@ -71,7 +75,7 @@ export default function CategoryIcons() {
               <span aria-hidden="true" className={styles.icon}>
                 {category.icon}
               </span>
-              <span>{category.title}</span>
+              <span>{t(category.title)}</span>
             </button>
           ))}
         </nav>

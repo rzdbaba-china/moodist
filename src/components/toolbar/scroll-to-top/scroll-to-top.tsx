@@ -5,6 +5,7 @@ import { motion } from 'motion/react';
 import { mix, fade, slideY } from '@/lib/motion';
 
 import styles from './scroll-to-top.module.css';
+import { t } from '@/lib/i18n';
 
 export function ScrollToTop() {
   const TOP = 50;
@@ -32,7 +33,7 @@ export function ScrollToTop() {
   return (
     <motion.button
       animate={isVisible ? 'show' : 'hidden'}
-      aria-label="Scroll to top"
+      aria-label={t('Scroll to top')}
       className={styles.button}
       exit="hidden"
       initial="hidden"

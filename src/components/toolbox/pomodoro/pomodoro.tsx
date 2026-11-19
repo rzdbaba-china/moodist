@@ -15,6 +15,7 @@ import { useSettingsStore } from '@/stores/settings';
 import { useCloseListener } from '@/hooks/use-close-listener';
 
 import styles from './pomodoro.module.css';
+import { t } from '@/lib/i18n';
 
 interface PomodoroProps {
   onClose: () => void;
@@ -144,7 +145,10 @@ export function Pomodoro({ onClose, open, show }: PomodoroProps) {
 
         <div className={styles.control}>
           <p className={styles.completed}>
-            {completions[selectedTab] || 0} completed
+            {t('{count} completed').replace(
+              '{count}',
+              String(completions[selectedTab] || 0),
+            )}
           </p>
           <div className={styles.buttons}>
             <Button

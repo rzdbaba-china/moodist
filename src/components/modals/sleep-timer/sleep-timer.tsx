@@ -13,6 +13,7 @@ import { dispatch } from '@/lib/event';
 import { useSoundStore } from '@/stores/sound';
 import { FADE_OUT } from '@/constants/events';
 import { useSleepTimerStore } from '@/stores/sleep-timer';
+import { t } from '@/lib/i18n';
 
 import styles from './sleep-timer.module.css';
 
@@ -148,7 +149,7 @@ function Field({ label, onChange, value }: FieldProps) {
   return (
     <div className={styles.field}>
       <label className={styles.label} htmlFor={label.toLocaleLowerCase()}>
-        {label}
+        {t(label)}
       </label>
       <input
         className={styles.input}

@@ -4,6 +4,7 @@ import { BiSolidHeart } from 'react-icons/bi/index';
 import { Howler } from 'howler';
 
 import { useSoundStore } from '@/stores/sound';
+import { useSettingsStore } from '@/stores/settings';
 
 import { Container } from '@/components/container';
 import { StoreConsumer } from '@/components/store-consumer';
@@ -28,6 +29,12 @@ export function App() {
   const pause = useSoundStore(state => state.pause);
   const lock = useSoundStore(state => state.lock);
   const unlock = useSoundStore(state => state.unlock);
+  const language = useSettingsStore(state => state.language);
+
+  useEffect(() => {
+    document.documentElement.lang = language;
+    document.dispatchEvent(new Event('moodist:language-change'));
+  }, [language]);
 
   const favoriteSounds = useMemo(() => {
     const favoriteSounds = categories

@@ -11,7 +11,7 @@ const paragraphs = [
     title: 'Free by design',
   },
   {
-    body: `Explore ${count} carefully selected sounds from nature, familiar places, color noise, and focused listening tools.`,
+    body: 'Explore {count} carefully selected sounds from nature, familiar places, color noise, and focused listening tools.',
     title: 'Carefully curated',
   },
   {
@@ -28,8 +28,13 @@ const paragraphs = [
 <section class="about">
   <Container>
     <header class="header">
-      <h2>A calmer space, shaped by sound.</h2>
-      <p class="intro">
+      <h2 data-i18n="A calmer space, shaped by sound.">
+        A calmer space, shaped by sound.
+      </h2>
+      <p
+        class="intro"
+        data-i18n="Moodist keeps ambient listening simple: choose a few sounds, find the right balance, and let the rest fade into the background."
+      >
         Moodist keeps ambient listening simple: choose a few sounds, find the
         right balance, and let the rest fade into the background.
       </p>
@@ -43,15 +48,29 @@ const paragraphs = [
               {String(index + 1).padStart(2, '0')}
             </p>
             <div>
-              <h3 class="title">{paragraph.title}</h3>
-              <p class="body">{paragraph.body}</p>
+              <h3 class="title" data-i18n={paragraph.title}>
+                {paragraph.title}
+              </h3>
+              <p
+                class="body"
+                data-i18n={paragraph.body}
+                data-i18n-count={count}
+              >
+                {paragraph.body.replace('{count}', String(count))}
+              </p>
             </div>
           </article>
         ))
       }
     </div>
 
-    <button class="button" id="use-moodist">Start mixing sounds</button>
+    <button
+      class="button"
+      data-i18n="Start mixing sounds"
+      id="use-moodist"
+    >
+      Start mixing sounds
+    </button>
   </Container>
 </section>
 

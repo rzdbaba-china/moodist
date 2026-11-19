@@ -14,9 +14,12 @@ interface Props {
 }
 
 const title = Astro.props.title || 'Moodist: Ambient Sounds for Focus and Calm';
+const soundCount = count();
+const descriptionKey =
+  'Moodist is a free and open-source ambient sound generator featuring {count} carefully curated sounds. Create your ideal atmosphere for relaxation, focus, or creativity with this versatile tool.';
 const description =
   Astro.props.description ||
-  `Moodist is a free and open-source ambient sound generator featuring ${count()} carefully curated sounds. Create your ideal atmosphere for relaxation, focus, or creativity with this versatile tool.`;
+  descriptionKey.replace('{count}', String(soundCount));
 ---
 
 <!doctype html>
@@ -51,12 +54,22 @@ const description =
     <Font cssVariable="--font-inter-tight" />
     <Font cssVariable="--font-fraunces" preload />
 
-    <title>{title}</title>
-    <meta content={title} name="title" />
-    <meta content={description} name="description" />
+    <title data-i18n={title}>{title}</title>
+    <meta content={title} data-i18n={title} name="title" />
+    <meta
+      content={description}
+      data-i18n={Astro.props.description || descriptionKey}
+      data-i18n-count={soundCount}
+      name="description"
+    />
 
-    <meta content={title} property="og:title" />
-    <meta content={description} property="og:description" />
+    <meta content={title} data-i18n={title} property="og:title" />
+    <meta
+      content={description}
+      data-i18n={Astro.props.description || descriptionKey}
+      data-i18n-count={soundCount}
+      property="og:description"
+    />
     <meta content="Moodist" property="og:site_name" />
     <meta content="https://moodist.app" property="og:url" />
     <meta content="website" property="og:type" />
@@ -72,3 +85,9 @@ const description =
     <Reload client:load />
   </body>
 </html>
+
+<script>
+  import { localizeStaticContent } from '@/lib/localize-static';
+
+  localizeStaticContent();
+</script>

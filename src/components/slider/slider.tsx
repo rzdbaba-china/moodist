@@ -1,4 +1,5 @@
 import { Slider as RadixSlider } from 'radix-ui';
+import { t } from '@/lib/i18n';
 import styles from './slider.module.css';
 
 type SliderProps = {
@@ -44,7 +45,7 @@ export function Slider({
         <RadixSlider.Range className={styles.sliderRange} />
       </RadixSlider.Track>
       <RadixSlider.Thumb
-        aria-label={ariaLabel}
+        aria-label={ariaLabel ? t(ariaLabel) : undefined}
         className={styles.sliderThumb}
       />
     </RadixSlider.Root>

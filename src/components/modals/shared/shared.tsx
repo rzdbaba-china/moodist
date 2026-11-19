@@ -13,6 +13,7 @@ import { useSoundStore } from '@/stores/sound';
 import { useSnackbar } from '@/contexts/snackbar';
 import { useCloseListener } from '@/hooks/use-close-listener';
 import { sounds } from '@/data/sounds';
+import { t } from '@/lib/i18n';
 
 import styles from './shared.module.css';
 
@@ -81,7 +82,7 @@ export function SharedModal() {
 
     override(newSounds);
     setIsOpen(false);
-    showSnackbar('Done! You can now play the new selection.');
+    showSnackbar(t('Done! You can now play the new selection.'));
   };
 
   useCloseListener(() => setIsOpen(false));
@@ -92,15 +93,16 @@ export function SharedModal() {
         <div>
           <ModalTitle>New sound mix detected!</ModalTitle>
           <ModalDescription>
-            Someone has shared the following mix with you. Would you want to
-            override your current selection?
+            {t(
+              'Someone has shared the following mix with you. Would you want to override your current selection?',
+            )}
           </ModalDescription>
         </div>
       </ModalHeader>
       <div className={styles.sounds}>
         {sharedSounds.map(sound => (
           <div className={styles.sound} key={sound.id}>
-            {sound.label}
+            {t(sound.label)}
           </div>
         ))}
       </div>

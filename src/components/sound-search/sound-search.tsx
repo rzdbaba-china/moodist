@@ -8,6 +8,7 @@ import { useCloseListener } from '@/hooks/use-close-listener';
 import { subscribe } from '@/lib/event';
 import { closeModals } from '@/lib/modal';
 import { useSoundStore } from '@/stores/sound';
+import { t } from '@/lib/i18n';
 
 import styles from './sound-search.module.css';
 
@@ -75,7 +76,7 @@ export function SoundSearch() {
     <Command.Dialog
       className={styles.command}
       contentClassName={styles.dialog}
-      label="Search sounds"
+      label={t('Search sounds')}
       loop
       open={open}
       overlayClassName={styles.overlay}
@@ -87,19 +88,21 @@ export function SoundSearch() {
       <div className={styles.inputRow}>
         <BiSearch aria-hidden="true" />
         <Command.Input
-          aria-label="Search sounds"
-          placeholder="Search sounds or categories..."
+          aria-label={t('Search sounds')}
+          placeholder={t('Search sounds or categories...')}
           value={query}
           onValueChange={setQuery}
         />
       </div>
 
-      <Command.List className={styles.results} aria-label="Sound results">
-        <Command.Empty className={styles.empty}>No sounds found.</Command.Empty>
+      <Command.List className={styles.results} aria-label={t('Sound results')}>
+        <Command.Empty className={styles.empty}>
+          {t('No sounds found.')}
+        </Command.Empty>
         {soundCatalog.categories.map(category => (
           <Command.Group
             className={styles.group}
-            heading={category.title}
+            heading={t(category.title)}
             key={category.id}
           >
             {category.sounds.map(sound => (
@@ -107,18 +110,23 @@ export function SoundSearch() {
                 className={styles.item}
                 disabled={locked}
                 key={sound.id}
-                keywords={[sound.label, category.title]}
+                keywords={[
+                  sound.label,
+                  t(sound.label),
+                  category.title,
+                  t(category.title),
+                ]}
                 value={sound.id}
                 onSelect={() => chooseSound(sound.id)}
               >
                 <span aria-hidden="true" className={styles.soundIcon}>
                   {sound.icon}
                 </span>
-                <span className={styles.soundName}>{sound.label}</span>
+                <span className={styles.soundName}>{t(sound.label)}</span>
                 {selectedSounds[sound.id]?.isSelected && (
                   <span className={styles.selected}>
                     <BiCheck aria-hidden="true" />
-                    Added
+                    {t('Added')}
                   </span>
                 )}
               </Command.Item>

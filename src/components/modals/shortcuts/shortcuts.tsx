@@ -1,4 +1,5 @@
 import { Modal, ModalHeader, ModalTitle } from '@/components/modal';
+import { t } from '@/lib/i18n';
 
 import styles from './shortcuts.module.css';
 
@@ -77,7 +78,7 @@ export function ShortcutsModal({ onClose, show }: ShortcutsModalProps) {
           <Row
             key={shortcut.label}
             keys={shortcut.keys}
-            label={shortcut.label}
+            label={t(shortcut.label)}
           />
         ))}
       </div>

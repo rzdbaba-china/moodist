@@ -15,6 +15,7 @@ import { useSettingsStore } from '@/stores/settings';
 import { useCloseListener } from '@/hooks/use-close-listener';
 
 import styles from './flowmodoro.module.css';
+import { t } from '@/lib/i18n';
 
 interface FlowmodoroProps {
   onClose: () => void;
@@ -128,7 +129,7 @@ export function Flowmodoro({ onClose, open, show }: FlowmodoroProps) {
     <>
       <Modal show={show} onClose={onClose}>
         <header className={styles.header}>
-          <h2 className={styles.title}>Flowmodoro Timer</h2>
+          <h2 className={styles.title}>{t('Flowmodoro Timer')}</h2>
 
           <div className={styles.button}>
             <Button
@@ -147,7 +148,10 @@ export function Flowmodoro({ onClose, open, show }: FlowmodoroProps) {
 
         <div className={styles.control}>
           <p className={styles.completed}>
-            {completions[selectedTab] || 0} completed
+            {t('{count} completed').replace(
+              '{count}',
+              String(completions[selectedTab] || 0),
+            )}
           </p>
           <div className={styles.buttons}>
             <Button

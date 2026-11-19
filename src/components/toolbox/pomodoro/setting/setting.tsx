@@ -7,6 +7,7 @@ import {
   ModalHeader,
   ModalTitle,
 } from '@/components/modal';
+import { t } from '@/lib/i18n';
 
 import styles from './setting.module.css';
 
@@ -100,7 +101,7 @@ function Field({ id, label, onChange, value }: FieldProps) {
   return (
     <div className={styles.field}>
       <label className={styles.label} htmlFor={id}>
-        {label} <span>(minutes)</span>
+        {t(label)} <span>({t('minutes')})</span>
       </label>
       <input
         className={styles.input}

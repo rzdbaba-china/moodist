@@ -15,6 +15,7 @@ import {
   ModalTitle,
 } from '@/components/modal';
 import { Slider } from '@/components/slider';
+import { t } from '@/lib/i18n';
 
 import styles from './radio.module.css';
 
@@ -224,15 +225,15 @@ export function RadioModal({ onClose, onPlayingChange, show }: RadioProps) {
           <div className={styles.loadingText}>
             <span />
             <span />
-            <p>Finding music stations…</p>
+            <p>{t('Finding music stations…')}</p>
           </div>
         </div>
       ) : loadError ? (
         <div className={styles.empty} role="alert">
           <LuRadio />
-          <p>Stations are unavailable right now.</p>
+          <p>{t('Stations are unavailable right now.')}</p>
           <button type="button" onClick={() => setRetryKey(key => key + 1)}>
-            Try again
+            {t('Try again')}
           </button>
         </div>
       ) : selectedStation ? (
@@ -251,7 +252,7 @@ export function RadioModal({ onClose, onPlayingChange, show }: RadioProps) {
             </div>
             <div className={styles.stationDetails}>
               <span className={styles.liveLabel}>
-                <span className={styles.liveDot} /> Live Radio
+                <span className={styles.liveDot} /> {t('Live Radio')}
               </span>
               <h3>{selectedStation.name}</h3>
               {selectedStation.website && (
@@ -260,7 +261,7 @@ export function RadioModal({ onClose, onPlayingChange, show }: RadioProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Visit station <LuExternalLink aria-hidden="true" />
+                  {t('Visit station')} <LuExternalLink aria-hidden="true" />
                 </a>
               )}
             </div>
@@ -268,7 +269,7 @@ export function RadioModal({ onClose, onPlayingChange, show }: RadioProps) {
 
           <div className={styles.field}>
             <span id="music-radio-station-label" className={styles.fieldLabel}>
-              Station
+              {t('Station')}
             </span>
             <Select.Root
               value={selectedStation.id}
@@ -310,21 +311,26 @@ export function RadioModal({ onClose, onPlayingChange, show }: RadioProps) {
                 </Select.Content>
               </Select.Portal>
             </Select.Root>
-            <small>{stations.length} music stations available</small>
+            <small>
+              {t('{count} music stations available').replace(
+                '{count}',
+                String(stations.length),
+              )}
+            </small>
           </div>
 
           <div className={styles.controls}>
             <button
               className={styles.playButton}
               type="button"
-              aria-label={playing ? 'Pause radio' : 'Play radio'}
+              aria-label={t(playing ? 'Pause radio' : 'Play radio')}
               onClick={togglePlayback}
             >
               {playing ? <LuPause /> : <LuPlay />}
             </button>
             <div className={styles.volume}>
               <div className={styles.volumeLabel}>
-                <span>Volume</span>
+                <span>{t('Volume')}</span>
                 <span>{volume}%</span>
               </div>
               <Slider
@@ -337,12 +343,12 @@ export function RadioModal({ onClose, onPlayingChange, show }: RadioProps) {
 
           <p className={styles.status} role="status" aria-live="polite">
             {playbackError
-              ? 'This stream could not play. Try another station.'
+              ? t('This stream could not play. Try another station.')
               : buffering
-                ? 'Connecting to station…'
+                ? t('Connecting to station…')
                 : playing
-                  ? 'Playing live radio'
-                  : 'Ready to play'}
+                  ? t('Playing live radio')
+                  : t('Ready to play')}
           </p>
 
           <audio

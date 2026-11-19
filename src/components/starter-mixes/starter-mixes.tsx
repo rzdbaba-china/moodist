@@ -6,6 +6,7 @@ import { Popover } from 'radix-ui';
 import { usePresetStore } from '@/stores/preset';
 import { useSoundStore } from '@/stores/sound';
 import { useCloseListener } from '@/hooks/use-close-listener';
+import { t } from '@/lib/i18n';
 
 import styles from './starter-mixes.module.css';
 
@@ -53,7 +54,7 @@ export function StarterMixes() {
         <Popover.Trigger asChild>
           <button className={styles.trigger} type="button">
             <RiPlayListFill aria-hidden="true" />
-            Play a mix
+            {t('Play a mix')}
           </button>
         </Popover.Trigger>
 
@@ -66,7 +67,7 @@ export function StarterMixes() {
             sideOffset={12}
           >
             <p className={styles.description}>
-              Choose a mix, then adjust the sounds.
+              {t('Choose a mix, then adjust the sounds.')}
             </p>
             {starterMixes.map(mix => (
               <button
@@ -76,8 +77,8 @@ export function StarterMixes() {
                 onClick={() => playMix(mix.sounds)}
               >
                 <span className={styles.mixText}>
-                  <strong>{mix.name}</strong>
-                  <span>{mix.description}</span>
+                  <strong>{t(mix.name)}</strong>
+                  <span>{mix.description.split(' · ').map(t).join(' · ')}</span>
                 </span>
                 <BiPlay aria-hidden="true" />
               </button>
@@ -86,7 +87,7 @@ export function StarterMixes() {
             {presets.length > 0 && (
               <>
                 <div className={styles.divider} />
-                <p className={styles.savedHeading}>Your mixes</p>
+                <p className={styles.savedHeading}>{t('Your mixes')}</p>
                 {presets.map(preset => (
                   <button
                     className={styles.mix}
@@ -95,8 +96,8 @@ export function StarterMixes() {
                     onClick={() => playMix(preset.sounds)}
                   >
                     <span className={styles.mixText}>
-                      <strong>{preset.label || 'Untitled mix'}</strong>
-                      <span>Saved mix</span>
+                      <strong>{preset.label || t('Untitled mix')}</strong>
+                      <span>{t('Saved mix')}</span>
                     </span>
                     <BiPlay aria-hidden="true" />
                   </button>

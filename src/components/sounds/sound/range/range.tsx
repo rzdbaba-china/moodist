@@ -1,4 +1,5 @@
 import { useSoundStore } from '@/stores/sound';
+import { t } from '@/lib/i18n';
 
 import styles from './range.module.css';
 
@@ -15,7 +16,7 @@ export function Range({ id, label }: RangeProps) {
 
   return (
     <input
-      aria-label={`${label} sound volume`}
+      aria-label={t('{sound} volume').replace('{sound}', label)}
       autoComplete="off"
       className={styles.range}
       disabled={!isSelected}

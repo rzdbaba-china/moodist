@@ -13,6 +13,7 @@ import { download } from '@/helpers/download';
 
 import styles from './notepad.module.css';
 import { Tooltip } from '@/components/tooltip';
+import { t } from '@/lib/i18n';
 
 interface NotepadProps {
   onClose: () => void;
@@ -76,7 +77,7 @@ export function Notepad({ onClose, show }: NotepadProps) {
       <textarea
         className={styles.textarea}
         dir="auto"
-        placeholder="What is on your mind?"
+        placeholder={t('What is on your mind?')}
         ref={textareaRef}
         spellCheck={false}
         value={note}
@@ -85,8 +86,9 @@ export function Notepad({ onClose, show }: NotepadProps) {
       />
 
       <p className={styles.counter}>
-        {characters} character{characters !== 1 && 's'} • {words} word
-        {words !== 1 && 's'}
+        {t('{characters} characters • {words} words')
+          .replace('{characters}', String(characters))
+          .replace('{words}', String(words))}
       </p>
     </Modal>
   );

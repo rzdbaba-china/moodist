@@ -6,6 +6,7 @@ import {
 } from '@/components/modal';
 import { Form } from './form';
 import { Todos } from './todos';
+import { t } from '@/lib/i18n';
 
 interface TodoProps {
   onClose: () => void;
@@ -18,7 +19,7 @@ export function Todo({ onClose, show }: TodoProps) {
       <ModalHeader>
         <div>
           <ModalTitle>Todo Checklist</ModalTitle>
-          <ModalDescription>Super simple todo list.</ModalDescription>
+          <ModalDescription>{t('Super simple todo list.')}</ModalDescription>
         </div>
       </ModalHeader>
 

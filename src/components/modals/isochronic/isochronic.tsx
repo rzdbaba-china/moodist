@@ -9,6 +9,7 @@ import {
   ModalTitle,
 } from '@/components/modal';
 import { Slider } from '@/components/slider';
+import { t } from '@/lib/i18n';
 
 import styles from './isochornic.module.css';
 
@@ -179,11 +180,11 @@ export function IsochronicModal({ onClose, show }: IsochronicProps) {
 
       <div className={styles.fieldWrapper}>
         <label>
-          Presets:
+          {t('Presets')}:
           <select value={selectedPreset} onChange={handlePresetChange}>
             {presets.map(preset => (
               <option key={preset.name} value={preset.name}>
-                {preset.name}
+                {t(preset.name)}
               </option>
             ))}
           </select>
@@ -193,7 +194,7 @@ export function IsochronicModal({ onClose, show }: IsochronicProps) {
         <>
           <div className={styles.fieldWrapper}>
             <label>
-              Base Frequency (Hz):
+              {t('Base Frequency (Hz)')}:
               <input
                 max="2000"
                 min="20"
@@ -208,7 +209,7 @@ export function IsochronicModal({ onClose, show }: IsochronicProps) {
           </div>
           <div className={styles.fieldWrapper}>
             <label>
-              Tone Frequency (Hz):
+              {t('Tone Frequency (Hz)')}:
               <input
                 max="40"
                 min="0.1"
@@ -228,10 +229,10 @@ export function IsochronicModal({ onClose, show }: IsochronicProps) {
                 value={waveform}
                 onChange={e => setWaveform(e.target.value as OscillatorType)}
               >
-                <option value="sine">Sine</option>
-                <option value="square">Square</option>
-                <option value="sawtooth">Sawtooth</option>
-                <option value="triangle">Triangle</option>
+                <option value="sine">{t('Sine')}</option>
+                <option value="square">{t('Square')}</option>
+                <option value="sawtooth">{t('Sawtooth')}</option>
+                <option value="triangle">{t('Triangle')}</option>
               </select>
             </label>
           </div> */}

@@ -4,6 +4,7 @@ import { cn } from '@/helpers/styles';
 import { useSoundStore } from '@/stores/sound';
 import { usePresetStore } from '@/stores/preset';
 import { useSnackbar } from '@/contexts/snackbar';
+import { t } from '@/lib/i18n';
 
 import styles from './new.module.css';
 
@@ -32,7 +33,7 @@ export function New({ onSaved }: { onSaved?: () => void }) {
       });
 
     addPreset(label, _sounds);
-    showSnackbar('Mix saved.');
+    showSnackbar(t('Mix saved.'));
 
     setName('');
     onSaved?.();
@@ -40,7 +41,7 @@ export function New({ onSaved }: { onSaved?: () => void }) {
 
   return (
     <div className={styles.new}>
-      <h3 className={styles.title}>Save current mix</h3>
+      <h3 className={styles.title}>{t('Save current mix')}</h3>
 
       <form
         className={cn(styles.form, noSelected && styles.disabled)}
@@ -48,7 +49,7 @@ export function New({ onSaved }: { onSaved?: () => void }) {
       >
         <input
           disabled={noSelected}
-          placeholder="Name this mix"
+          placeholder={t('Name this mix')}
           required
           maxLength={60}
           type="text"
@@ -58,11 +59,13 @@ export function New({ onSaved }: { onSaved?: () => void }) {
             setName(e.target.value);
           }}
         />
-        <button disabled={noSelected}>Save</button>
+        <button disabled={noSelected}>{t('Save')}</button>
       </form>
 
       {noSelected && (
-        <p className={styles.noSelected}>Select some sounds to save a mix.</p>
+        <p className={styles.noSelected}>
+          {t('Select some sounds to save a mix.')}
+        </p>
       )}
     </div>
   );

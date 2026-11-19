@@ -9,6 +9,7 @@ import {
   ModalTitle,
 } from '@/components/modal';
 import { Slider } from '@/components/slider';
+import { t } from '@/lib/i18n';
 
 import styles from './binaural.module.css';
 
@@ -178,11 +179,11 @@ export function BinauralModal({ onClose, show }: BinauralProps) {
 
       <div className={styles.fieldWrapper}>
         <label>
-          Presets:
+          {t('Presets')}:
           <select value={selectedPreset} onChange={handlePresetChange}>
             {presets.map(preset => (
               <option key={preset.name} value={preset.name}>
-                {preset.name}
+                {t(preset.name)}
               </option>
             ))}
           </select>
@@ -192,7 +193,7 @@ export function BinauralModal({ onClose, show }: BinauralProps) {
         <>
           <div className={styles.fieldWrapper}>
             <label>
-              Base Frequency (Hz):
+              {t('Base Frequency (Hz)')}:
               <input
                 max="1500"
                 min="20"
@@ -207,7 +208,7 @@ export function BinauralModal({ onClose, show }: BinauralProps) {
           </div>
           <div className={styles.fieldWrapper}>
             <label>
-              Beat Frequency (Hz):
+              {t('Beat Frequency (Hz)')}:
               <input
                 max="40"
                 min="0.1"
@@ -224,7 +225,7 @@ export function BinauralModal({ onClose, show }: BinauralProps) {
       )}
       <div className={styles.fieldWrapper}>
         <label>
-          Volume:
+          {t('Volume')}:
           <Slider
             className={styles.volume}
             max={1}
@@ -245,7 +246,7 @@ export function BinauralModal({ onClose, show }: BinauralProps) {
           Start
         </ModalButton>
         <ModalButton fullWidth disabled={!isPlaying} onClick={stopSound}>
-          Stop
+          {t('Stop')}
         </ModalButton>
       </ModalActions>
     </Modal>

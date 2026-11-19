@@ -1,4 +1,5 @@
 import { Sounds } from '@/components/sounds';
+import { t } from '@/lib/i18n';
 
 import styles from './category.module.css';
 
@@ -24,7 +25,7 @@ export function Category({
         </div>
       </div>
 
-      <div className={styles.title}>{title}</div>
+      <div className={styles.title}>{t(title)}</div>
 
       <Sounds functional={functional} id={id} sounds={sounds} />
     </div>
